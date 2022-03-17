@@ -10,7 +10,7 @@ public class HelloExpress {
 	
 	@GetMapping
 	public String hello() {
-		return "Hello Express Analytics.";
+		return "Hello Express Analytics Version 2.";
 	}
 
 }
