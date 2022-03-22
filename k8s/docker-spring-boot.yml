@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docker-spring-boot
+  labels:
+    app: docker-spring-boot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+    app: docker-spring-boot
+  template:
+    metadata:
+      labels:
+        app: docker-spring-boot
+    spec:
+      containers:
+      - name: ea-docker-poc
+        image: eavinaykaple/ea-docker-poc:latest
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 7030
+
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name:  docker-spring-boot
+spec:
+  selector:
+    app:  ea-docker-poc
+  type: ClusterIP
+  ports:
+    - port: 90
+      targetPort: 7030
